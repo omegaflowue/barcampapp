@@ -37,24 +37,6 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">{{ t('session.duration') }}</label>
-          <div class="duration-options">
-            <label class="duration-option">
-              <input type="radio" v-model="form.duration" :value="30" name="duration" />
-              {{ t('duration.30') }}
-            </label>
-            <label class="duration-option">
-              <input type="radio" v-model="form.duration" :value="45" name="duration" checked />
-              {{ t('duration.45') }}
-            </label>
-            <label class="duration-option">
-              <input type="radio" v-model="form.duration" :value="60" name="duration" />
-              {{ t('duration.60') }}
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label class="form-label">{{ t('session.infrastructure') }}</label>
           <div class="infrastructure-options">
             <label class="infrastructure-option" v-for="infra in infrastructureTypes" :key="infra">
@@ -100,12 +82,11 @@ const form = ref<CreateSessionRequest>({
   title: '',
   description: '',
   presenter: '',
-  duration: 45,
   infrastructure: []
 });
 
 const submitting = ref(false);
-const eventId = ref('550e8400-e29b-41d4-a716-446655440000'); // Hardcoded for demo
+const eventId = ref('c0368715-a2f5-4e19-91db-653799c1ed2f'); // Hardcoded for demo
 
 function getInfraIcon(type: InfrastructureType): string {
   return InfrastructureIcons[type] || '';
@@ -136,14 +117,12 @@ function goBack() {
   margin: 0 auto;
 }
 
-.duration-options,
 .infrastructure-options {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.duration-option,
 .infrastructure-option {
   display: flex;
   align-items: center;
@@ -155,13 +134,11 @@ function goBack() {
   transition: all 0.2s;
 }
 
-.duration-option:hover,
 .infrastructure-option:hover {
   border-color: var(--primary-color);
   background-color: var(--surface);
 }
 
-.duration-option input[type="radio"]:checked ~ *,
 .infrastructure-option input[type="checkbox"]:checked ~ * {
   font-weight: 600;
 }

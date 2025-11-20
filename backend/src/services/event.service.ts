@@ -83,15 +83,17 @@ export class EventService {
 
   async createTimeSlot(eventId: string, data: CreateTimeSlotRequest): Promise<TimeSlot> {
     const query = `
-      INSERT INTO time_slots (event_id, start_time, end_time)
-      VALUES ($1, $2, $3)
+      INSERT INTO time_slots (event_id, start_time, end_time, type, label)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *
     `;
 
     const result = await pool.query(query, [
       eventId,
       data.start_time,
-      data.end_time
+      data.end_time,
+      data.type,
+      data.label || null
     ]);
 
     return result.rows[0];

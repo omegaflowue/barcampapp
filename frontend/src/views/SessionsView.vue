@@ -69,7 +69,7 @@ const sessionStore = useSessionStore();
 const searchQuery = ref('');
 
 // Hardcoded event ID for demo (in production, this would come from route or store)
-const eventId = ref('550e8400-e29b-41d4-a716-446655440000');
+const eventId = ref('c0368715-a2f5-4e19-91db-653799c1ed2f');
 
 const loading = computed(() => sessionStore.loading);
 const error = computed(() => sessionStore.error);

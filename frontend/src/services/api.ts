@@ -4,6 +4,8 @@ import type {
   Session,
   SessionWithSchedule,
   CreateSessionRequest,
+  CreateRoomRequest,
+  CreateTimeSlotRequest,
   Room,
   TimeSlot,
   OptimizeScheduleResponse,
@@ -47,7 +49,7 @@ export const votingAPI = {
 // Rooms API
 export const roomsAPI = {
   getAll: (eventId: string) => api.get<Room[]>(`/events/${eventId}/rooms`),
-  create: (eventId: string, data: { name: string; capacity: number; infrastructure: string[] }) =>
+  create: (eventId: string, data: CreateRoomRequest) =>
     api.post<Room>(`/events/${eventId}/rooms`, data),
   delete: (id: string) => api.delete(`/rooms/${id}`)
 };
@@ -55,7 +57,7 @@ export const roomsAPI = {
 // Time Slots API
 export const timeSlotsAPI = {
   getAll: (eventId: string) => api.get<TimeSlot[]>(`/events/${eventId}/time-slots`),
-  create: (eventId: string, data: { start_time: string; end_time: string }) =>
+  create: (eventId: string, data: CreateTimeSlotRequest) =>
     api.post<TimeSlot>(`/events/${eventId}/time-slots`, data),
   delete: (id: string) => api.delete(`/time-slots/${id}`)
 };

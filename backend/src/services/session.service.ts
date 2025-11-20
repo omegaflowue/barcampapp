@@ -100,7 +100,7 @@ export class SessionService {
       data.title,
       data.description,
       data.presenter,
-      data.duration,
+      45, // Fixed duration: all sessions are 45 minutes
       JSON.stringify(data.infrastructure)
     ];
 
@@ -124,10 +124,6 @@ export class SessionService {
     if (data.presenter !== undefined) {
       fields.push(`presenter = $${paramCounter++}`);
       values.push(data.presenter);
-    }
-    if (data.duration !== undefined) {
-      fields.push(`duration = $${paramCounter++}`);
-      values.push(data.duration);
     }
     if (data.infrastructure !== undefined) {
       fields.push(`infrastructure = $${paramCounter++}`);

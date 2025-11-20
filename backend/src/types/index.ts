@@ -6,6 +6,9 @@ export interface Infrastructure {
   required: boolean;
 }
 
+// TimeSlot types
+export type TimeSlotType = 'SESSION' | 'BREAKFAST' | 'LUNCH' | 'DINNER' | 'BREAK';
+
 // Event status
 export type EventStatus = 'PREPARATION' | 'OPEN_FOR_SUBMISSIONS' | 'VOTING' | 'SCHEDULING' | 'RUNNING' | 'ARCHIVED';
 
@@ -36,6 +39,8 @@ export interface TimeSlot {
   event_id: string;
   start_time: Date;
   end_time: Date;
+  type: TimeSlotType;
+  label?: string;
   created_at: Date;
 }
 
@@ -83,13 +88,14 @@ export interface CreateRoomRequest {
 export interface CreateTimeSlotRequest {
   start_time: string;
   end_time: string;
+  type: TimeSlotType;
+  label?: string;
 }
 
 export interface CreateSessionRequest {
   title: string;
   description: string;
   presenter: string;
-  duration: number;
   infrastructure: InfrastructureType[];
 }
 
@@ -97,7 +103,6 @@ export interface UpdateSessionRequest {
   title?: string;
   description?: string;
   presenter?: string;
-  duration?: number;
   infrastructure?: InfrastructureType[];
 }
 

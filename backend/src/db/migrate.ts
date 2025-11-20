@@ -35,6 +35,8 @@ CREATE TABLE time_slots (
     event_id UUID REFERENCES events(id) ON DELETE CASCADE,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
+    type VARCHAR(50) DEFAULT 'SESSION' NOT NULL,
+    label VARCHAR(255),
     created_at TIMESTAMP DEFAULT NOW()
 );
 

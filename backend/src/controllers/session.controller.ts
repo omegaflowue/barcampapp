@@ -8,10 +8,10 @@ export class SessionController {
     try {
       const { eventId } = req.params;
       const sessions = await sessionService.getAllSessions(eventId);
-      res.json(sessions);
+      return res.json(sessions);
     } catch (error) {
       console.error('Error fetching sessions:', error);
-      res.status(500).json({ error: 'Failed to fetch sessions' });
+      return res.status(500).json({ error: 'Failed to fetch sessions' });
     }
   }
 
@@ -24,10 +24,10 @@ export class SessionController {
         return res.status(404).json({ error: 'Session not found' });
       }
 
-      res.json(session);
+      return res.json(session);
     } catch (error) {
       console.error('Error fetching session:', error);
-      res.status(500).json({ error: 'Failed to fetch session' });
+      return res.status(500).json({ error: 'Failed to fetch session' });
     }
   }
 
@@ -41,10 +41,10 @@ export class SessionController {
         req.app.locals.wsService.broadcast('session:new', session);
       }
 
-      res.status(201).json(session);
+      return res.status(201).json(session);
     } catch (error) {
       console.error('Error creating session:', error);
-      res.status(500).json({ error: 'Failed to create session' });
+      return res.status(500).json({ error: 'Failed to create session' });
     }
   }
 
@@ -62,10 +62,10 @@ export class SessionController {
         req.app.locals.wsService.broadcast('session:updated', session);
       }
 
-      res.json(session);
+      return res.json(session);
     } catch (error) {
       console.error('Error updating session:', error);
-      res.status(500).json({ error: 'Failed to update session' });
+      return res.status(500).json({ error: 'Failed to update session' });
     }
   }
 
@@ -83,10 +83,10 @@ export class SessionController {
         req.app.locals.wsService.broadcast('session:deleted', { id });
       }
 
-      res.status(204).send();
+      return res.status(204).send();
     } catch (error) {
       console.error('Error deleting session:', error);
-      res.status(500).json({ error: 'Failed to delete session' });
+      return res.status(500).json({ error: 'Failed to delete session' });
     }
   }
 }

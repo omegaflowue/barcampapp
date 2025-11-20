@@ -6,6 +6,9 @@ export interface Infrastructure {
   required: boolean;
 }
 
+// TimeSlot types
+export type TimeSlotType = 'SESSION' | 'BREAKFAST' | 'LUNCH' | 'DINNER' | 'BREAK';
+
 // Event status
 export type EventStatus = 'PREPARATION' | 'OPEN_FOR_SUBMISSIONS' | 'VOTING' | 'SCHEDULING' | 'RUNNING' | 'ARCHIVED';
 
@@ -36,6 +39,8 @@ export interface TimeSlot {
   event_id: string;
   start_time: Date | string;
   end_time: Date | string;
+  type: TimeSlotType;
+  label?: string;
   created_at: Date | string;
 }
 
@@ -67,8 +72,27 @@ export interface CreateSessionRequest {
   title: string;
   description: string;
   presenter: string;
-  duration: number;
   infrastructure: InfrastructureType[];
+}
+
+export interface UpdateSessionRequest {
+  title?: string;
+  description?: string;
+  presenter?: string;
+  infrastructure?: InfrastructureType[];
+}
+
+export interface CreateRoomRequest {
+  name: string;
+  capacity: number;
+  infrastructure: InfrastructureType[];
+}
+
+export interface CreateTimeSlotRequest {
+  start_time: string;
+  end_time: string;
+  type: TimeSlotType;
+  label?: string;
 }
 
 export interface OptimizationMetrics {
@@ -118,4 +142,21 @@ export const InfrastructureLabels: Record<InfrastructureType, { de: string; en: 
   FLIPCHART: { de: 'Flipchart', en: 'Flipchart' },
   WHITEBOARD: { de: 'Whiteboard', en: 'Whiteboard' },
   MODERATION_KIT: { de: 'Moderationskoffer', en: 'Moderation Kit' }
+};
+
+// Icon mapping for time slot types
+export const TimeSlotTypeIcons: Record<TimeSlotType, string> = {
+  SESSION: '🎯',
+  BREAKFAST: '☕',
+  LUNCH: '🍽️',
+  DINNER: '🍷',
+  BREAK: '⏸️'
+};
+
+export const TimeSlotTypeLabels: Record<TimeSlotType, { de: string; en: string }> = {
+  SESSION: { de: 'Session', en: 'Session' },
+  BREAKFAST: { de: 'Frühstück', en: 'Breakfast' },
+  LUNCH: { de: 'Mittagessen', en: 'Lunch' },
+  DINNER: { de: 'Abendessen', en: 'Dinner' },
+  BREAK: { de: 'Pause', en: 'Break' }
 };

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { Event, Room, TimeSlot } from '../types';
+import type { Event, Room, TimeSlot, CreateRoomRequest, CreateTimeSlotRequest } from '../types';
 import { eventsAPI, roomsAPI, timeSlotsAPI } from '../services/api';
 
 export const useEventStore = defineStore('event', () => {
@@ -73,6 +73,48 @@ export const useEventStore = defineStore('event', () => {
     }
   }
 
+  async function createRoom(eventId: string, data: CreateRoomRequest) {
+    try {
+      const response = await roomsAPI.create(eventId, data);
+      rooms.value.push(response.data);
+      return response.data;
+    } catch (err: any) {
+      console.error('Error creating room:', err);
+      throw err;
+    }
+  }
+
+  async function deleteRoom(roomId: string) {
+    try {
+      await roomsAPI.delete(roomId);
+      rooms.value = rooms.value.filter(r => r.id !== roomId);
+    } catch (err: any) {
+      console.error('Error deleting room:', err);
+      throw err;
+    }
+  }
+
+  async function createTimeSlot(eventId: string, data: CreateTimeSlotRequest) {
+    try {
+      const response = await timeSlotsAPI.create(eventId, data);
+      timeSlots.value.push(response.data);
+      return response.data;
+    } catch (err: any) {
+      console.error('Error creating time slot:', err);
+      throw err;
+    }
+  }
+
+  async function deleteTimeSlot(timeSlotId: string) {
+    try {
+      await timeSlotsAPI.delete(timeSlotId);
+      timeSlots.value = timeSlots.value.filter(t => t.id !== timeSlotId);
+    } catch (err: any) {
+      console.error('Error deleting time slot:', err);
+      throw err;
+    }
+  }
+
   return {
     currentEvent,
     events,
@@ -84,6 +126,10 @@ export const useEventStore = defineStore('event', () => {
     fetchEvent,
     createEvent,
     fetchRooms,
-    fetchTimeSlots
+    fetchTimeSlots,
+    createRoom,
+    deleteRoom,
+    createTimeSlot,
+    deleteTimeSlot
   };
 });

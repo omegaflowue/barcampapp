@@ -75,7 +75,7 @@ const { t } = useI18n();
 const sessionStore = useSessionStore();
 
 const currentSession = ref<SessionWithSchedule | null>(null);
-const eventId = ref('550e8400-e29b-41d4-a716-446655440000');
+const eventId = ref('c0368715-a2f5-4e19-91db-653799c1ed2f');
 
 const sessions = computed(() => sessionStore.sessions);
 const topSessions = computed(() => sessionStore.sortedSessions.slice(0, 20));
