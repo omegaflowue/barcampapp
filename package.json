@@ -1,0 +1,19 @@
+{
+  "name": "barcamp-manager",
+  "version": "1.0.0",
+  "description": "Progressive Web Application for Barcamp Management",
+  "private": true,
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "db:setup": "docker-compose up -d && timeout /t 10 && cd backend && npm run db:migrate && npm run db:seed",
+    "db:migrate": "cd backend && npm run db:migrate",
+    "db:seed": "cd backend && npm run db:seed",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": ["barcamp", "pwa", "vue", "express", "websocket"],
+  "author": "",
+  "license": "MIT"
+}
